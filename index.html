@@ -6,7 +6,7 @@
   <title>A Letter For You ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=EB+Garamond:ital,wght@1,400;1,500&family=Playfair+Display:ital,wght@1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     /* ═══════════════════════════════════════════
@@ -14,13 +14,16 @@
     ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
+    html {
       height: 100%;
+      height: -webkit-fill-available;
+      background: radial-gradient(ellipse at 50% 38%, #FFEDF4 0%, #FFCCE0 100%);
     }
 
     body {
       min-height: 100%;
       min-height: -webkit-fill-available;
+      min-height: 100dvh;
       background: radial-gradient(ellipse at 50% 38%, #FFEDF4 0%, #FFCCE0 100%);
       display: flex;
       align-items: center;
@@ -303,21 +306,25 @@
     .letter-overlay {
       position: fixed;
       inset: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow-y: hidden;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       padding: 30px 18px 56px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.85s ease 0.72s;
+      visibility: hidden;
+      transition: opacity 0.85s ease 0.72s, visibility 0s linear 0.85s;
       z-index: 10;
     }
 
     .letter-overlay.show {
       opacity: 1;
       pointer-events: all;
+      visibility: visible;
+      transition: opacity 0.85s ease 0.72s, visibility 0s linear 0s;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* ═══════════════════════════════════════════
@@ -399,15 +406,16 @@
        ✦  LETTER BODY — EDIT YOUR MESSAGE HERE  ✦
     ═══════════════════════════════════════════ */
     .letter-body {
-      font-family: 'Lato', sans-serif;
+      font-family: 'EB Garamond', serif;
       font-weight: 300;
-      font-size: 15.5px;
-      line-height: 1.95;
+      font-style: normal;
+      font-size: 17px;
+      line-height: 2.0;
       color: #3C2828;
       letter-spacing: 0.012em;
     }
 
-    .letter-body p            { margin-bottom: 17px; }
+    .letter-body p            { margin-bottom: 22px; }
     .letter-body p:last-child { margin-bottom: 0; }
 
     /* ═══════════════════════════════════════════
@@ -433,7 +441,7 @@
       line-height: 1.2;
     }
 
-    .letter-hearts-end {
+        .letter-hearts-end {
       text-align: center;
       margin-top: 34px;
       color: #FFB3C6;
@@ -559,13 +567,20 @@
 
         <!-- Edit the paragraphs below with your message -->
         <div class="letter-body">
-          <p>There are days I catch myself just watching you — the way you laugh, the way your eyes light up over the smallest things — and I think, how did I get so lucky?</p>
+          <!-- <p>There are days I catch myself just watching you — the way you laugh, the way your eyes light up over the smallest things — and I think, how did I get so lucky?</p> -->
+           <!--Lying here I wonder if you miss me. -->
+           <!--  -->
+          <p>If words alone are not enough. I've made you this in hopes you blush.</p>
 
-          <p>You make ordinary moments feel like something I'll want to remember forever. Morning coffee, late nights, the drive to nowhere — everything is better when it's with you.</p>
+          <!-- <p>You make ordinary moments feel like something I'll want to remember forever. Morning coffee, late nights, the drive to nowhere — everything is better when it's with you.</p> -->
 
-          <p>I don't always say it enough, but I mean it every single day: you are my favorite part of this world, and loving you is the easiest thing I've ever done.</p>
+          <p>I love your voice, your face, your touch. </p>
 
-          <p>I love you more than you know.</p>
+          <!-- <p>I don't always say it enough, but I mean it every single day: you are my favorite part of this world, and loving you is the easiest thing I've ever done.</p> -->
+
+          <p>I love you lots, maybe even too much.</p>
+
+          <p>Thus, if there comes a time your heart forgets. Just read this letter, and have your heart be fixed.</p>
         </div>
 
         <!-- Change "Drew" to your name -->
@@ -634,16 +649,14 @@
     function openEnvelope() {
       if (opened) return;
       opened = true;
-
-      envelope.classList.add('still');   /* stop idle bob     */
-      tapHint.classList.add('gone');     /* hide hint         */
-
-      setTimeout(() => waxSeal.classList.add('burst'),        110);  /* seal pops   */
-      setTimeout(() => flapTop.classList.add('open'),         370);  /* flap opens  */
-      setTimeout(emitSparkles,                                680);  /* sparkles    */
-      setTimeout(() => envWrap.classList.add('fade-out'),     820);  /* env recedes */
-      setTimeout(() => letterOverlay.classList.add('show'),   960);  /* letter in   */
-      setTimeout(() => replayBtn.classList.add('show'),      2700);  /* replay hint */
+      envelope.classList.add('still');
+      tapHint.classList.add('gone');
+      setTimeout(() => waxSeal.classList.add('burst'),        110);
+      setTimeout(() => flapTop.classList.add('open'),         370);
+      setTimeout(emitSparkles,                                680);
+      setTimeout(() => envWrap.classList.add('fade-out'),     820);
+      setTimeout(() => letterOverlay.classList.add('show'),   960);
+      setTimeout(() => replayBtn.classList.add('show'),      2700);
     }
 
     /* ── Sparkle burst ── */
@@ -652,7 +665,6 @@
       const cx  = r.left + r.width  / 2;
       const cy  = r.top  + r.height / 2;
       const pal = ['#FFB3C6','#E08090','#FFDCE8','#FF8FA8','#FFF0F4','#F5BFCC'];
-
       for (let i = 0; i < 18; i++) {
         const sp    = document.createElement('div');
         sp.className = 'sparkle';
