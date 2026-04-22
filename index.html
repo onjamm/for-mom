@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Letter For You ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════
+       Reset & Base
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100%;
+      min-height: -webkit-fill-available;
+      background: radial-gradient(ellipse at 50% 38%, #FFEDF4 0%, #FFCCE0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Lato', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ═══════════════════════════════════════════
+       Background Floating Hearts
+    ═══════════════════════════════════════════ */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-heart {
+      position: absolute;
+      color: #FFB3C6;
+      opacity: 0;
+      font-size: var(--size, 12px);
+      animation: floatHeart var(--dur, 7s) ease-in-out infinite var(--delay, 0s);
+      user-select: none;
+    }
+
+    @keyframes floatHeart {
+      0%   { opacity: 0;             transform: translateY(10px) scale(0.82); }
+      22%  { opacity: var(--a, 0.2); }
+      78%  { opacity: var(--a, 0.2); }
+      100% { opacity: 0;             transform: translateY(-18px) scale(1.06); }
+    }
+
+    /* ═══════════════════════════════════════════
+       Scene Container
+    ═══════════════════════════════════════════ */
+    .scene {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+
+    /* ═══════════════════════════════════════════
+       Envelope Wrapper
+    ═══════════════════════════════════════════ */
+    .env-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 0.75s ease 0.55s, transform 0.75s cubic-bezier(0.4,0,0.2,1) 0.55s;
+    }
+
+    .env-wrap.fade-out {
+      opacity: 0;
+      transform: scale(0.87) translateY(14px);
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       The Envelope
+    ═══════════════════════════════════════════ */
+    .envelope {
+      position: relative;
+      width: 288px;
+      height: 202px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      animation: envBob 4.6s ease-in-out infinite;
+      filter:
+        drop-shadow(0 14px 32px rgba(210, 80, 130, 0.24))
+        drop-shadow(0 4px 10px rgba(210, 80, 130, 0.14));
+    }
+
+    .envelope.still { animation: none; }
+
+    @keyframes envBob {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      38%       { transform: translateY(-8px) rotate(0.25deg); }
+      72%       { transform: translateY(-4px) rotate(-0.25deg); }
+    }
+
+    /* ── Envelope base body ── */
+    .env-body {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(150deg, #FFF0F5 0%, #FFE0EC 100%);
+      border-radius: 3px;
+    }
+
+    /* Soft inner depth — warm center glow suggesting the enclosed letter */
+    .env-body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 3px;
+      background: radial-gradient(ellipse at 50% 72%, rgba(220, 120, 160, 0.10) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    /* Subtle crease lines at fold */
+    .env-body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 3px;
+      background:
+        linear-gradient(to bottom right,
+          transparent 49.6%, rgba(200, 110, 150, 0.14) 50%,
+          transparent 50.4%),
+        linear-gradient(to bottom left,
+          transparent 49.6%, rgba(200, 110, 150, 0.14) 50%,
+          transparent 50.4%);
+      pointer-events: none;
+    }
+
+    /* ── Decorative side + bottom flaps (static) ── */
+    .env-flap-bottom {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 100%, 100% 100%, 50% 52%);
+      background: linear-gradient(to top, #FFD0E2, #FFC4D8);
+    }
+
+    .env-flap-left {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 0 100%, 50.4% 52%);
+      background: linear-gradient(to right, #FFC0D4, #FFD0E2);
+    }
+
+    .env-flap-right {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(100% 0, 100% 100%, 49.6% 52%);
+      background: linear-gradient(to left, #FFC0D4, #FFD0E2);
+    }
+
+    /* ── Top flap (opens on tap) ── */
+    .env-flap-top {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 53%);
+      /* Noticeably distinct from the body — this must read as a separate flap face */
+      background: linear-gradient(172deg, #FFADC8 0%, #F99ABB 55%, #F085AB 100%);
+      transform-origin: top center;
+      transition: transform 0.88s cubic-bezier(0.4, 0.0, 0.15, 1.0);
+      z-index: 12;
+      border-radius: 3px 3px 0 0;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Sheen highlight on flap */
+    .env-flap-top::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .env-flap-top.open {
+      transform: perspective(750px) rotateX(-178deg);
+    }
+
+    /* ═══════════════════════════════════════════
+       Wax Seal
+    ═══════════════════════════════════════════ */
+    .wax-seal {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      /* flap face center: 50% of apex depth = 107/2 = 54px, seal top = 54 - 22 = 32px */
+      /* (85px was wrong — that put the seal AT the apex tip, sitting on the paper) */
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 14;
+      background: radial-gradient(circle at 36% 30%, #D87A90 0%, #C4677A 42%, #A85268 100%);
+      box-shadow:
+        0 3px 12px rgba(160, 75, 100, 0.45),
+        0 1px 3px  rgba(160, 75, 100, 0.30),
+        inset 0 1.5px 0 rgba(255, 215, 225, 0.35),
+        inset 0 -2px 4px rgba(115, 45, 65, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.42s ease;
+    }
+
+    .wax-seal::before {
+      content: '♥';
+      font-size: 18px;
+      color: rgba(255, 238, 244, 0.88);
+      text-shadow: 0 1px 3px rgba(115, 45, 65, 0.5);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wax-seal::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 200, 215, 0.22);
+    }
+
+    .wax-seal.burst {
+      transform: translateX(-50%) scale(1.22);
+      opacity: 0;
+      transition: transform 0.38s ease, opacity 0.40s ease 0.06s;
+    }
+
+    /* ═══════════════════════════════════════════
+       Tap Hint
+    ═══════════════════════════════════════════ */
+    .tap-hint {
+      margin-top: 28px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: #8C1F58;
+      letter-spacing: 0.02em;
+      animation: hintPulse 2.8s ease-in-out infinite;
+      transition: opacity 0.35s ease;
+    }
+
+    .tap-hint.gone {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.45; }
+      50%       { opacity: 0.95; }
+    }
+
+    /* ═══════════════════════════════════════════
+       Sparkle Particles
+    ═══════════════════════════════════════════ */
+    .sparkle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 60;
+      animation: sparkleOut var(--spd, 0.85s) ease-out forwards;
+    }
+
+    @keyframes sparkleOut {
+      0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.18); }
+    }
+
+    /* ═══════════════════════════════════════════
+       Letter Overlay
+    ═══════════════════════════════════════════ */
+    .letter-overlay {
+      position: fixed;
+      inset: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 18px 56px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.85s ease 0.72s;
+      z-index: 10;
+    }
+
+    .letter-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ═══════════════════════════════════════════
+       Letter Card
+    ═══════════════════════════════════════════ */
+    .letter-card {
+      width: 100%;
+      max-width: 360px;
+      background: #FFFCF8;
+      border-radius: 2px;
+      padding: 48px 32px 52px;
+      position: relative;
+      transform: translateY(32px);
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.68s;
+      box-shadow:
+        0 28px 72px rgba(175, 80, 105, 0.11),
+        0 8px  22px rgba(175, 80, 105, 0.07),
+        0 2px  5px  rgba(175, 80, 105, 0.05),
+         1px 1px 0 rgba(255, 228, 235, 0.6),
+        -1px 1px 0 rgba(255, 228, 235, 0.6);
+    }
+
+    .letter-overlay.show .letter-card {
+      transform: translateY(0);
+    }
+
+    .corner-heart {
+      position: absolute;
+      font-size: 10px;
+      color: #FFB3C6;
+      opacity: 0.55;
+    }
+    .corner-tl { top: 15px; left: 19px; }
+    .corner-tr { top: 15px; right: 19px; }
+
+    /* ═══════════════════════════════════════════
+       Letter Interior
+    ═══════════════════════════════════════════ */
+    .letter-date {
+      font-family: 'Dancing Script', cursive;
+      font-size: 13px;
+      color: #7A5555;
+      text-align: right;
+      margin-bottom: 22px;
+      letter-spacing: 0.01em;
+    }
+
+    .letter-salutation {
+      font-family: 'Dancing Script', cursive;
+      font-size: 27px;
+      font-weight: 700;
+      color: #C4677A;
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    .letter-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #F5CBD6;
+      opacity: 0.65;
+    }
+
+    .divider-hearts {
+      font-size: 9px;
+      color: #FFB3C6;
+      letter-spacing: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       ✦  LETTER BODY — EDIT YOUR MESSAGE HERE  ✦
+    ═══════════════════════════════════════════ */
+    .letter-body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 15.5px;
+      line-height: 1.95;
+      color: #3C2828;
+      letter-spacing: 0.012em;
+    }
+
+    .letter-body p            { margin-bottom: 17px; }
+    .letter-body p:last-child { margin-bottom: 0; }
+
+    /* ═══════════════════════════════════════════
+       Letter Closing
+    ═══════════════════════════════════════════ */
+    .letter-closing {
+      margin-top: 30px;
+    }
+
+    .closing-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 14.5px;
+      color: #8A6060;
+      margin-bottom: 2px;
+      letter-spacing: 0.01em;
+    }
+
+    .letter-signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+      font-weight: 700;
+      color: #C4677A;
+      line-height: 1.2;
+    }
+
+    .letter-hearts-end {
+      text-align: center;
+      margin-top: 34px;
+      color: #FFB3C6;
+      font-size: 14px;
+      letter-spacing: 7px;
+      padding-left: 7px;
+      animation: heartBeat 2.4s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      12%       { transform: scale(1.20); }
+      26%       { transform: scale(1); }
+      40%       { transform: scale(1.11); }
+      54%       { transform: scale(1); }
+    }
+
+    /* ═══════════════════════════════════════════
+       Replay Button
+    ═══════════════════════════════════════════ */
+    .replay-btn {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 136, 154, 0.38);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #C4889A;
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.2s ease;
+      box-shadow: 0 2px 10px rgba(196, 104, 122, 0.12);
+      -webkit-tap-highlight-color: transparent;
+      z-index: 20;
+    }
+
+    .replay-btn.show     { opacity: 0.62; pointer-events: all; }
+    .replay-btn:active   { opacity: 1; transform: scale(1.08); }
+
+    /* ═══════════════════════════════════════════
+       Reduced Motion
+    ═══════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      .envelope          { animation: none !important; }
+      .bg-heart          { animation: none !important; opacity: 0.12 !important; }
+      .tap-hint          { animation: none !important; opacity: 0.85 !important; }
+      .env-flap-top      { transition-duration: 0.05s !important; }
+      .letter-hearts-end { animation: none !important; }
+      .env-wrap,
+      .letter-overlay,
+      .letter-card,
+      .wax-seal          { transition-duration: 0.1s !important; transition-delay: 0s !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Ambient floating hearts -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="scene">
+
+    <!-- ══════════════════════════════
+         ENVELOPE
+    ══════════════════════════════ -->
+    <div class="env-wrap" id="envWrap">
+
+      <div class="envelope" id="envelope">
+        <div class="env-body"></div>
+        <div class="env-flap-bottom"></div>
+        <div class="env-flap-left"></div>
+        <div class="env-flap-right"></div>
+        <div class="env-flap-top" id="flapTop"></div>
+        <div class="wax-seal" id="waxSeal"></div>
+      </div>
+
+      <div class="tap-hint" id="tapHint">tap to open ♡</div>
+    </div>
+
+    <!-- ══════════════════════════════
+         LETTER
+    ══════════════════════════════ -->
+    <div class="letter-overlay" id="letterOverlay">
+      <div class="letter-card">
+
+        <span class="corner-heart corner-tl">♥</span>
+        <span class="corner-heart corner-tr">♥</span>
+
+        <!-- Auto-filled date -->
+        <div class="letter-date" id="letterDate"></div>
+
+        <!-- ════════════════════════════════════════════════
+             ✦  EDIT YOUR LETTER CONTENT BELOW THIS LINE  ✦
+             ════════════════════════════════════════════════ -->
+
+        <!-- Change "my love" to her name if you'd like -->
+        <div class="letter-salutation">For you, my love ♡</div>
+
+        <div class="letter-divider">
+          <div class="divider-line"></div>
+          <div class="divider-hearts">♥ ♥ ♥</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Edit the paragraphs below with your message -->
+        <div class="letter-body">
+          <p>There are days I catch myself just watching you — the way you laugh, the way your eyes light up over the smallest things — and I think, how did I get so lucky?</p>
+
+          <p>You make ordinary moments feel like something I'll want to remember forever. Morning coffee, late nights, the drive to nowhere — everything is better when it's with you.</p>
+
+          <p>I don't always say it enough, but I mean it every single day: you are my favorite part of this world, and loving you is the easiest thing I've ever done.</p>
+
+          <p>I love you more than you know.</p>
+        </div>
+
+        <!-- Change "Drew" to your name -->
+        <div class="letter-closing">
+          <div class="closing-text">forever yours,</div>
+          <div class="letter-signature">Drew ♡</div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════
+             ✦  END OF EDITABLE CONTENT  ✦
+             ════════════════════════════════════════════════ -->
+
+        <div class="letter-hearts-end">♥ ♥ ♥</div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Replay -->
+  <button class="replay-btn" id="replayBtn" aria-label="Replay">↺</button>
+
+
+  <script>
+    /* ── Ambient background hearts ── */
+    (function () {
+      const c = document.getElementById('bgHearts');
+      [
+        { l:'7%',  t:'9%',  s:'14px', d:'6.8s', dl:'0s',    a:'0.35' },
+        { l:'87%', t:'7%',  s:'11px', d:'8.2s', dl:'1.9s',  a:'0.30' },
+        { l:'13%', t:'73%', s:'12px', d:'7.1s', dl:'0.8s',  a:'0.32' },
+        { l:'83%', t:'79%', s:'16px', d:'7.6s', dl:'2.3s',  a:'0.28' },
+        { l:'50%', t:'4%',  s:'9px',  d:'9.4s', dl:'3.2s',  a:'0.26' },
+        { l:'4%',  t:'44%', s:'13px', d:'8.1s', dl:'1.0s',  a:'0.30' },
+        { l:'93%', t:'40%', s:'10px', d:'9.8s', dl:'2.7s',  a:'0.27' },
+        { l:'35%', t:'89%', s:'14px', d:'7.3s', dl:'0.4s',  a:'0.32' },
+        { l:'65%', t:'84%', s:'10px', d:'10.2s',dl:'4.4s',  a:'0.24' },
+        { l:'23%', t:'19%', s:'9px',  d:'11.1s',dl:'1.3s',  a:'0.28' },
+      ].forEach(h => {
+        const el = document.createElement('div');
+        el.className = 'bg-heart';
+        el.textContent = '♥';
+        el.style.cssText =
+          `left:${h.l};top:${h.t};--size:${h.s};--dur:${h.d};--delay:${h.dl};--a:${h.a}`;
+        c.appendChild(el);
+      });
+    })();
+
+    /* ── Auto-fill today's date ── */
+    (function () {
+      const months = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+      const n = new Date();
+      document.getElementById('letterDate').textContent =
+        `${months[n.getMonth()]} ${n.getDate()}, ${n.getFullYear()}`;
+    })();
+
+    /* ── Envelope interaction ── */
+    const envelope      = document.getElementById('envelope');
+    const envWrap       = document.getElementById('envWrap');
+    const flapTop       = document.getElementById('flapTop');
+    const waxSeal       = document.getElementById('waxSeal');
+    const tapHint       = document.getElementById('tapHint');
+    const letterOverlay = document.getElementById('letterOverlay');
+    const replayBtn     = document.getElementById('replayBtn');
+    let opened = false;
+
+    function openEnvelope() {
+      if (opened) return;
+      opened = true;
+
+      envelope.classList.add('still');   /* stop idle bob     */
+      tapHint.classList.add('gone');     /* hide hint         */
+
+      setTimeout(() => waxSeal.classList.add('burst'),        110);  /* seal pops   */
+      setTimeout(() => flapTop.classList.add('open'),         370);  /* flap opens  */
+      setTimeout(emitSparkles,                                680);  /* sparkles    */
+      setTimeout(() => envWrap.classList.add('fade-out'),     820);  /* env recedes */
+      setTimeout(() => letterOverlay.classList.add('show'),   960);  /* letter in   */
+      setTimeout(() => replayBtn.classList.add('show'),      2700);  /* replay hint */
+    }
+
+    /* ── Sparkle burst ── */
+    function emitSparkles() {
+      const r   = envelope.getBoundingClientRect();
+      const cx  = r.left + r.width  / 2;
+      const cy  = r.top  + r.height / 2;
+      const pal = ['#FFB3C6','#E08090','#FFDCE8','#FF8FA8','#FFF0F4','#F5BFCC'];
+
+      for (let i = 0; i < 18; i++) {
+        const sp    = document.createElement('div');
+        sp.className = 'sparkle';
+        const angle  = (i / 18) * Math.PI * 2 + (Math.random() - 0.5) * 0.45;
+        const dist   = 44 + Math.random() * 95;
+        const size   = 3 + Math.random() * 5.5;
+        const color  = pal[Math.floor(Math.random() * pal.length)];
+        sp.style.cssText = [
+          `left:${(cx + (Math.random() - 0.5) * 55).toFixed(1)}px`,
+          `top:${(cy + (Math.random() - 0.5) * 55).toFixed(1)}px`,
+          `width:${size.toFixed(1)}px`,
+          `height:${size.toFixed(1)}px`,
+          `background:${color}`,
+          `--tx:${(Math.cos(angle) * dist).toFixed(1)}px`,
+          `--ty:${(Math.sin(angle) * dist).toFixed(1)}px`,
+          `--spd:${(0.5 + Math.random() * 0.6).toFixed(2)}s`
+        ].join(';');
+        document.body.appendChild(sp);
+        setTimeout(() => sp.remove(), 1300);
+      }
+    }
+
+    /* ── Listeners ── */
+    envelope.addEventListener('click', openEnvelope);
+    envelope.addEventListener('touchstart', e => {
+      e.preventDefault();
+      openEnvelope();
+    }, { passive: false });
+
+    replayBtn.addEventListener('click', () => location.reload());
+  </script>
+
+</body>
+</html>
+                                                                                           
