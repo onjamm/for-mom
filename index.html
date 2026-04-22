@@ -25,7 +25,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       font-family: 'Lato', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -39,7 +38,7 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
+
     }
 
     .bg-heart {
@@ -152,21 +151,31 @@
       position: absolute;
       inset: 0;
       clip-path: polygon(0 100%, 100% 100%, 50% 52%);
-      background: linear-gradient(to top, #FFD0E2, #FFC4D8);
+      background: linear-gradient(to top, #FFCADA, #FFD8E8);
     }
 
     .env-flap-left {
       position: absolute;
       inset: 0;
       clip-path: polygon(0 0, 0 100%, 50.4% 52%);
-      background: linear-gradient(to right, #FFC0D4, #FFD0E2);
+      background: linear-gradient(to right, #FFCADA, #FFD8E8);
     }
 
     .env-flap-right {
       position: absolute;
       inset: 0;
       clip-path: polygon(100% 0, 100% 100%, 49.6% 52%);
-      background: linear-gradient(to left, #FFC0D4, #FFD0E2);
+      background: linear-gradient(to left, #FFCADA, #FFD8E8);
+    }
+
+    /* ── Fold lines ── */
+    .env-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
     }
 
     /* ── Top flap (opens on tap) ── */
@@ -177,14 +186,10 @@
       /* Noticeably distinct from the body — this must read as a separate flap face */
       background: linear-gradient(172deg, #FFADC8 0%, #F99ABB 55%, #F085AB 100%);
       transform-origin: top center;
-      transition: transform 0.88s cubic-bezier(0.4, 0.0, 0.15, 1.0);
+      transition: transform 2.3s cubic-bezier(0.34, 1.35, 0.64, 1);
       z-index: 12;
       border-radius: 3px 3px 0 0;
-      overflow: hidden;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      /* cast shadow onto the flaps below — makes it read as physically on top */
-      filter: drop-shadow(0 4px 8px rgba(150, 40, 90, 0.30));
+
     }
 
     /* Sheen highlight on flap */
@@ -199,7 +204,7 @@
     }
 
     .env-flap-top.open {
-      transform: perspective(750px) rotateX(-178deg);
+      transform: perspective(750px) rotateX(-162deg);
     }
 
     /* ═══════════════════════════════════════════
@@ -512,6 +517,12 @@
         <div class="env-flap-bottom"></div>
         <div class="env-flap-left"></div>
         <div class="env-flap-right"></div>
+        <svg class="env-lines" viewBox="0 0 288 202" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="0"   y1="0"   x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
+          <line x1="288" y1="0"   x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
+          <line x1="0"   y1="202" x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
+          <line x1="288" y1="202" x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
+        </svg>
         <div class="env-flap-top" id="flapTop"></div>
         <div class="wax-seal" id="waxSeal"></div>
       </div>
@@ -519,10 +530,12 @@
       <div class="tap-hint" id="tapHint">tap to open ♡</div>
     </div>
 
-    <!-- ══════════════════════════════
-         LETTER
-    ══════════════════════════════ -->
-    <div class="letter-overlay" id="letterOverlay">
+  </div><!-- /.scene -->
+
+  <!-- ══════════════════════════════
+       LETTER (outside .scene so position:fixed isn't trapped in its stacking context)
+  ══════════════════════════════ -->
+  <div class="letter-overlay" id="letterOverlay">
       <div class="letter-card">
 
         <span class="corner-heart corner-tl">♥</span>
@@ -569,8 +582,6 @@
 
       </div>
     </div>
-
-  </div>
 
   <!-- Replay -->
   <button class="replay-btn" id="replayBtn" aria-label="Replay">↺</button>
@@ -651,24 +662,39 @@
         const color  = pal[Math.floor(Math.random() * pal.length)];
         sp.style.cssText = [
           `left:${(cx + (Math.random() - 0.5) * 55).toFixed(1)}px`,
-          `top:${(cy + (Math.random() - 0.5) * 55).toFixed(1)}px`,
+          `top:${(cy  + (Math.random() - 0.5) * 55).toFixed(1)}px`,
           `width:${size.toFixed(1)}px`,
           `height:${size.toFixed(1)}px`,
           `background:${color}`,
           `--tx:${(Math.cos(angle) * dist).toFixed(1)}px`,
           `--ty:${(Math.sin(angle) * dist).toFixed(1)}px`,
-          `--spd:${(0.5 + Math.random() * 0.6).toFixed(2)}s`
+          `--spd:${(0.65 + Math.random() * 0.45).toFixed(2)}s`,
         ].join(';');
         document.body.appendChild(sp);
-        setTimeout(() => sp.remove(), 1300);
+        sp.addEventListener('animationend', () => sp.remove());
       }
     }
 
-    /* ── Listeners ── */
-    envelope.addEventListener('click', openEnvelope);
-    envelope.addEventListener('touchstart', e => {
+    /* ── Event listeners ── */
+    envelope.addEventListener('touchstart', function (e) {
       e.preventDefault();
       openEnvelope();
     }, { passive: false });
 
-    replayBtn.addEventListener('click', 
+    envelope.addEventListener('click', openEnvelope);
+
+    /* ── Replay ── */
+    replayBtn.addEventListener('click', function () {
+      opened = false;
+      envelope.classList.remove('still');
+      tapHint.classList.remove('gone');
+      flapTop.classList.remove('open');
+      waxSeal.classList.remove('burst');
+      envWrap.classList.remove('fade-out');
+      letterOverlay.classList.remove('show');
+      replayBtn.classList.remove('show');
+    });
+
+  </script>
+</body>
+</html>
