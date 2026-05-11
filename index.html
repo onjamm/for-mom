@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='40%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23FFB3C6'/%3E%3Cstop offset='100%25' stop-color='%23C4677A'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext y='.9em' font-size='90' text-anchor='middle' x='50' fill='url(%23g)'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='40%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23C07858'/%3E%3Cstop offset='100%25' stop-color='%236B1020'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext y='.9em' font-size='90' text-anchor='middle' x='50' fill='url(%23g)'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
   <meta name="description" content="showing you i care, the way i know best.">
-  <title>A Letter For You ♡</title>
+  <title>A Letter For Mom ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Libre+Baskerville:ital,wght@1,400&family=Playfair+Display:ital,wght@1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
@@ -19,14 +19,16 @@
     html {
       height: 100%;
       height: -webkit-fill-available;
-      background: radial-gradient(ellipse at 50% 38%, #FFEDF4 0%, #FFCCE0 100%);
+      background:
+        radial-gradient(ellipse at 50% 38%, #FDF8F8 0%, #F3E6E8 48%, #E2D0D2 100%);
     }
 
     body {
       min-height: 100%;
       min-height: -webkit-fill-available;
       min-height: 100dvh;
-      background: radial-gradient(ellipse at 50% 38%, #FFEDF4 0%, #FFCCE0 100%);
+      background:
+        radial-gradient(ellipse at 50% 38%, #FDF8F8 0%, #F3E6E8 48%, #E2D0D2 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -43,12 +45,11 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-
     }
 
     .bg-heart {
       position: absolute;
-      color: #FFB3C6;
+      color: #C08898;
       opacity: 0;
       font-size: var(--size, 12px);
       animation: floatHeart var(--dur, 7s) ease-in-out infinite var(--delay, 0s);
@@ -77,15 +78,15 @@
       height: -webkit-fill-available;
     }
 
-
     .env-to {
       font-family: 'Dancing Script', cursive;
       font-size: 26px;
-      color: #A63050;
+      color: #8B4858;
       letter-spacing: 0.02em;
       margin-bottom: 28px;
-      opacity: 0.82;
+      opacity: 0.88;
     }
+
     /* ═══════════════════════════════════════════
        Envelope Wrapper
     ═══════════════════════════════════════════ */
@@ -114,8 +115,8 @@
       user-select: none;
       animation: envBob 4.6s ease-in-out infinite;
       filter:
-        drop-shadow(0 14px 32px rgba(210, 80, 130, 0.24))
-        drop-shadow(0 4px 10px rgba(210, 80, 130, 0.14));
+        drop-shadow(0 16px 36px rgba(150, 80, 95, 0.24))
+        drop-shadow(0 5px 12px rgba(150, 80, 95, 0.15));
     }
 
     .envelope.still { animation: none; }
@@ -126,25 +127,23 @@
       72%       { transform: translateY(-4px) rotate(-0.25deg); }
     }
 
-    /* ── Envelope base body ── */
+    /* ── Envelope base body — cream/ivory ── */
     .env-body {
       position: absolute;
       inset: 0;
-      background: linear-gradient(150deg, #FFF0F5 0%, #FFE0EC 100%);
+      background: linear-gradient(150deg, #FBF6EE 0%, #F2E8D8 100%);
       border-radius: 3px;
     }
 
-    /* Soft inner depth — warm center glow suggesting the enclosed letter */
     .env-body::after {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: 3px;
-      background: radial-gradient(ellipse at 50% 72%, rgba(220, 120, 160, 0.10) 0%, transparent 62%);
+      background: radial-gradient(ellipse at 50% 72%, rgba(170, 90, 100, 0.07) 0%, transparent 62%);
       pointer-events: none;
     }
 
-    /* Subtle crease lines at fold */
     .env-body::before {
       content: '';
       position: absolute;
@@ -152,34 +151,34 @@
       border-radius: 3px;
       background:
         linear-gradient(to bottom right,
-          transparent 49.6%, rgba(200, 110, 150, 0.14) 50%,
+          transparent 49.6%, rgba(160, 90, 105, 0.09) 50%,
           transparent 50.4%),
         linear-gradient(to bottom left,
-          transparent 49.6%, rgba(200, 110, 150, 0.14) 50%,
+          transparent 49.6%, rgba(160, 90, 105, 0.09) 50%,
           transparent 50.4%);
       pointer-events: none;
     }
 
-    /* ── Decorative side + bottom flaps (static) ── */
+    /* ── Side + bottom flaps — dusty rose ── */
     .env-flap-bottom {
       position: absolute;
       inset: 0;
       clip-path: polygon(0 100%, 100% 100%, 50% 52%);
-      background: linear-gradient(to top, #FFCADA, #FFD8E8);
+      background: linear-gradient(to top, #B87080, #CC8898);
     }
 
     .env-flap-left {
       position: absolute;
       inset: 0;
       clip-path: polygon(0 0, 0 100%, 50.4% 52%);
-      background: linear-gradient(to right, #FFCADA, #FFD8E8);
+      background: linear-gradient(to right, #B87080, #CC8898);
     }
 
     .env-flap-right {
       position: absolute;
       inset: 0;
       clip-path: polygon(100% 0, 100% 100%, 49.6% 52%);
-      background: linear-gradient(to left, #FFCADA, #FFD8E8);
+      background: linear-gradient(to left, #B87080, #CC8898);
     }
 
     /* ── Fold lines ── */
@@ -192,21 +191,18 @@
       z-index: 5;
     }
 
-    /* ── Top flap (opens on tap) ── */
+    /* ── Top flap — pronounced gradient to sell the fold ── */
     .env-flap-top {
       position: absolute;
       inset: 0;
       clip-path: polygon(0 0, 100% 0, 50% 53%);
-      /* Noticeably distinct from the body — this must read as a separate flap face */
-      background: linear-gradient(172deg, #FFADC8 0%, #F99ABB 55%, #F085AB 100%);
+      background: linear-gradient(180deg, #D898A8 0%, #B87080 38%, #88485C 100%);
       transform-origin: top center;
       transition: transform 2.3s cubic-bezier(0.34, 1.35, 0.64, 1);
       z-index: 12;
       border-radius: 3px 3px 0 0;
-
     }
 
-    /* Sheen highlight on flap */
     .env-flap-top::before {
       content: '';
       position: absolute;
@@ -222,25 +218,23 @@
     }
 
     /* ═══════════════════════════════════════════
-       Wax Seal
+       Wax Seal — warm burgundy with gold highlight
     ═══════════════════════════════════════════ */
     .wax-seal {
       position: absolute;
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      /* flap face center: 50% of apex depth = 107/2 = 54px, seal top = 54 - 22 = 32px */
-      /* (85px was wrong — that put the seal AT the apex tip, sitting on the paper) */
       top: 32px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 14;
-      background: radial-gradient(circle at 36% 30%, #D87A90 0%, #C4677A 42%, #A85268 100%);
+      background: radial-gradient(circle at 35% 30%, #FFF8EE 0%, #F5E8D8 50%, #E8D8C4 100%);
       box-shadow:
-        0 3px 12px rgba(160, 75, 100, 0.45),
-        0 1px 3px  rgba(160, 75, 100, 0.30),
-        inset 0 1.5px 0 rgba(255, 215, 225, 0.35),
-        inset 0 -2px 4px rgba(115, 45, 65, 0.28);
+        0 3px 14px rgba(150, 80, 95, 0.30),
+        0 1px 4px  rgba(150, 80, 95, 0.18),
+        inset 0 1.5px 0 rgba(255, 255, 245, 0.80),
+        inset 0 -2px 5px rgba(180, 140, 110, 0.20);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -251,8 +245,8 @@
     .wax-seal::before {
       content: '♥';
       font-size: 26px;
-      color: rgba(255, 238, 244, 0.88);
-      text-shadow: 0 1px 3px rgba(115, 45, 65, 0.5);
+      color: rgba(175, 90, 110, 0.90);
+      text-shadow: 0 1px 2px rgba(200, 150, 160, 0.30);
       line-height: 1;
       position: relative;
       z-index: 1;
@@ -263,7 +257,7 @@
       position: absolute;
       inset: 3px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 200, 215, 0.22);
+      border: 1px solid rgba(200, 160, 140, 0.25);
     }
 
     .wax-seal.burst {
@@ -279,7 +273,7 @@
       margin-top: 28px;
       font-family: 'Dancing Script', cursive;
       font-size: 16px;
-      color: #8C1F58;
+      color: #906070;
       letter-spacing: 0.02em;
       animation: hintPulse 2.8s ease-in-out infinite;
       transition: opacity 0.35s ease;
@@ -291,8 +285,8 @@
     }
 
     @keyframes hintPulse {
-      0%, 100% { opacity: 0.45; }
-      50%       { opacity: 0.95; }
+      0%, 100% { opacity: 0.38; }
+      50%       { opacity: 0.82; }
     }
 
     /* ═══════════════════════════════════════════
@@ -336,6 +330,7 @@
       transition: opacity 0.85s ease 0.72s, visibility 0s linear 0s;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      background: radial-gradient(ellipse at 50% 38%, #FDF8F8 0%, #F3E6E8 48%, #E2D0D2 100%);
     }
 
     /* ═══════════════════════════════════════════
@@ -344,18 +339,18 @@
     .letter-card {
       width: 100%;
       max-width: 360px;
-      background: #FFFCF8;
+      background: #FFFDF8;
       border-radius: 2px;
-      padding: 48px 32px 52px;
+      padding: 48px 24px 52px;
       position: relative;
       transform: translateY(32px);
       transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.68s;
       box-shadow:
-        0 28px 72px rgba(175, 80, 105, 0.11),
-        0 8px  22px rgba(175, 80, 105, 0.07),
-        0 2px  5px  rgba(175, 80, 105, 0.05),
-         1px 1px 0 rgba(255, 228, 235, 0.6),
-        -1px 1px 0 rgba(255, 228, 235, 0.6);
+        0 28px 72px rgba(70, 15, 25, 0.12),
+        0 8px  22px rgba(70, 15, 25, 0.08),
+        0 2px  5px  rgba(70, 15, 25, 0.05),
+         1px 1px 0 rgba(235, 215, 195, 0.7),
+        -1px 1px 0 rgba(235, 215, 195, 0.7);
     }
 
     .letter-overlay.show .letter-card {
@@ -365,8 +360,8 @@
     .corner-heart {
       position: absolute;
       font-size: 10px;
-      color: #FFB3C6;
-      opacity: 0.55;
+      color: #A06050;
+      opacity: 0.45;
     }
     .corner-tl { top: 15px; left: 19px; }
     .corner-tr { top: 15px; right: 19px; }
@@ -377,7 +372,7 @@
     .letter-date {
       font-family: 'Dancing Script', cursive;
       font-size: 13px;
-      color: #7A5555;
+      color: #7A5040;
       text-align: right;
       margin-bottom: 22px;
       letter-spacing: 0.01em;
@@ -387,7 +382,7 @@
       font-family: 'Dancing Script', cursive;
       font-size: 27px;
       font-weight: 700;
-      color: #C4677A;
+      color: #A05868;
       line-height: 1.25;
       margin-bottom: 5px;
     }
@@ -402,13 +397,13 @@
     .divider-line {
       flex: 1;
       height: 1px;
-      background: #F5CBD6;
-      opacity: 0.65;
+      background: linear-gradient(to right, transparent, #C4907A, transparent);
+      opacity: 0.55;
     }
 
     .divider-hearts {
       font-size: 9px;
-      color: #FFB3C6;
+      color: #B07060;
       letter-spacing: 4px;
       flex-shrink: 0;
     }
@@ -420,9 +415,9 @@
       font-family: 'Libre Baskerville', serif;
       font-weight: 300;
       font-style: normal;
-      font-size: 17px;
-      line-height: 2.0;
-      color: #3C2828;
+      font-size: 14px;
+      line-height: 1.85;
+      color: #2C1C18;
       letter-spacing: 0.012em;
     }
 
@@ -438,9 +433,9 @@
 
     .closing-text {
       font-family: 'Dancing Script', cursive;
-      font-size: 14.5px;
-      color: #8A6060;
-      margin-bottom: 2px;
+      font-size: 18px;
+      color: #7A5040;
+      margin-bottom: 22px;
       letter-spacing: 0.01em;
     }
 
@@ -448,14 +443,14 @@
       font-family: 'Dancing Script', cursive;
       font-size: 32px;
       font-weight: 700;
-      color: #C4677A;
+      color: #A05868;
       line-height: 1.2;
     }
 
-        .letter-hearts-end {
+    .letter-hearts-end {
       text-align: center;
-      margin-top: 34px;
-      color: #FFB3C6;
+      margin-top: 38px;
+      color: #B07060;
       font-size: 14px;
       letter-spacing: 7px;
       padding-left: 7px;
@@ -480,11 +475,11 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: 1px solid rgba(196, 136, 154, 0.38);
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(100, 30, 40, 0.30);
+      background: rgba(251, 246, 238, 0.80);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      color: #C4889A;
+      color: #A05868;
       font-size: 16px;
       line-height: 1;
       display: flex;
@@ -494,7 +489,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s ease, transform 0.2s ease;
-      box-shadow: 0 2px 10px rgba(196, 104, 122, 0.12);
+      box-shadow: 0 2px 10px rgba(60, 10, 20, 0.10);
       -webkit-tap-highlight-color: transparent;
       z-index: 20;
     }
@@ -507,7 +502,7 @@
     ═══════════════════════════════════════════ */
     @media (prefers-reduced-motion: reduce) {
       .envelope          { animation: none !important; }
-      .bg-heart          { animation: none !important; opacity: 0.12 !important; }
+      .bg-heart          { animation: none !important; opacity: 0.08 !important; }
       .tap-hint          { animation: none !important; opacity: 0.85 !important; }
       .env-flap-top      { transition-duration: 0.05s !important; }
       .letter-hearts-end { animation: none !important; }
@@ -521,27 +516,23 @@
 
 <body>
 
-  <!-- Ambient floating hearts -->
   <div class="bg-hearts" id="bgHearts"></div>
 
   <div class="scene">
 
-    <!-- ══════════════════════════════
-         ENVELOPE
-    ══════════════════════════════ -->
     <div class="env-wrap" id="envWrap">
 
-      <div class="env-to">For Tori ♡</div>
+      <div class="env-to">For Mom ♡</div>
       <div class="envelope" id="envelope">
         <div class="env-body"></div>
         <div class="env-flap-bottom"></div>
         <div class="env-flap-left"></div>
         <div class="env-flap-right"></div>
         <svg class="env-lines" viewBox="0 0 288 202" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="0"   y1="0"   x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
-          <line x1="288" y1="0"   x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
-          <line x1="0"   y1="202" x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
-          <line x1="288" y1="202" x2="144" y2="107" stroke="rgba(160,60,100,0.13)" stroke-width="0.75"/>
+          <line x1="0"   y1="0"   x2="144" y2="107" stroke="rgba(155,85,100,0.11)" stroke-width="0.75"/>
+          <line x1="288" y1="0"   x2="144" y2="107" stroke="rgba(155,85,100,0.11)" stroke-width="0.75"/>
+          <line x1="0"   y1="202" x2="144" y2="107" stroke="rgba(155,85,100,0.11)" stroke-width="0.75"/>
+          <line x1="288" y1="202" x2="144" y2="107" stroke="rgba(155,85,100,0.11)" stroke-width="0.75"/>
         </svg>
         <div class="env-flap-top" id="flapTop"></div>
         <div class="wax-seal" id="waxSeal"></div>
@@ -550,85 +541,68 @@
       <div class="tap-hint" id="tapHint">tap to open ♡</div>
     </div>
 
-  </div><!-- /.scene -->
+  </div>
 
-  <!-- ══════════════════════════════
-       LETTER (outside .scene so position:fixed isn't trapped in its stacking context)
-  ══════════════════════════════ -->
   <div class="letter-overlay" id="letterOverlay">
-      <div class="letter-card">
+    <div class="letter-card">
 
-        <span class="corner-heart corner-tl">♥</span>
-        <span class="corner-heart corner-tr">♥</span>
+      <span class="corner-heart corner-tl">♥</span>
+      <span class="corner-heart corner-tr">♥</span>
 
-        <!-- Auto-filled date -->
-        <div class="letter-date" id="letterDate"></div>
+      <div class="letter-date" id="letterDate"></div>
 
-        <!-- ════════════════════════════════════════════════
-             ✦  EDIT YOUR LETTER CONTENT BELOW THIS LINE  ✦
-             ════════════════════════════════════════════════ -->
+      <!-- ════════════════════════════════════════════════
+           ✦  EDIT YOUR LETTER CONTENT BELOW THIS LINE  ✦
+           ════════════════════════════════════════════════ -->
 
-        <!-- Change "my love" to her name if you'd like -->
-        <div class="letter-salutation">For you, my love ♡</div>
+      <div class="letter-salutation">For Mom ♡</div>
 
-        <div class="letter-divider">
-          <div class="divider-line"></div>
-          <div class="divider-hearts">♥ ♥ ♥</div>
-          <div class="divider-line"></div>
-        </div>
-
-        <!-- Edit the paragraphs below with your message -->
-        <div class="letter-body">
-          <!-- <p>There are days I catch myself just watching you — the way you laugh, the way your eyes light up over the smallest things — and I think, how did I get so lucky?</p> -->
-           <!--Lying here I wonder if you miss me. -->
-           <!--  -->
-          <p>If words alone are not enough. I've made you this in hopes you blush.</p>
-
-          <!-- <p>You make ordinary moments feel like something I'll want to remember forever. Morning coffee, late nights, the drive to nowhere — everything is better when it's with you.</p> -->
-
-          <p>I love your voice, your face, your touch. </p>
-
-          <!-- <p>I don't always say it enough, but I mean it every single day: you are my favorite part of this world, and loving you is the easiest thing I've ever done.</p> -->
-
-          <p>I love you lots, maybe even too much.</p>
-
-          <p>Thus, if there comes a time your heart forgets. Just read this letter, and have your heart be fixed!</p>
-        </div>
-
-        <!-- Change "Drew" to your name -->
-        <div class="letter-closing">
-          <div class="closing-text">forever yours,</div>
-          <div class="letter-signature">Drew ♡</div>
-        </div>
-
-        <!-- ════════════════════════════════════════════════
-             ✦  END OF EDITABLE CONTENT  ✦
-             ════════════════════════════════════════════════ -->
-
-        <div class="letter-hearts-end">♥ ♥ ♥</div>
-
+      <div class="letter-divider">
+        <div class="divider-line"></div>
+        <div class="divider-hearts">♥ ♥ ♥</div>
+        <div class="divider-line"></div>
       </div>
+
+      <div class="letter-body">
+        <p>A mother's love is warm and bright,<br>It fills our hearts with joy and light.</p>
+
+        <p>Through every day, in all they do,<br>Moms, we know your love is true!</p>
+
+        <p>Today's a day to celebrate,<br>To say we love you — Mom, you're great!</p>
+      </div>
+
+      <!-- Change "Drew" to your name -->
+      <div class="letter-closing">
+        <div class="closing-text">Sincerely,</div>
+        <div class="letter-signature">Tori + Drew ♡</div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════
+           ✦  END OF EDITABLE CONTENT  ✦
+           ════════════════════════════════════════════════ -->
+
+      <div class="letter-hearts-end">♥ ♥ ♥</div>
+
     </div>
+  </div>
 
-  <!-- Replay -->
   <button class="replay-btn" id="replayBtn" aria-label="Replay">↺</button>
-
 
   <script>
     /* ── Ambient background hearts ── */
     (function () {
       const c = document.getElementById('bgHearts');
       [
-        { l:'7%',  t:'9%',  s:'14px', d:'6.8s', dl:'0s',    a:'0.35' },
-        { l:'87%', t:'7%',  s:'11px', d:'8.2s', dl:'1.9s',  a:'0.30' },
-        { l:'13%', t:'73%', s:'12px', d:'7.1s', dl:'0.8s',  a:'0.32' },
-        { l:'83%', t:'79%', s:'16px', d:'7.6s', dl:'2.3s',  a:'0.28' },
-        { l:'50%', t:'4%',  s:'9px',  d:'9.4s', dl:'3.2s',  a:'0.26' },
-        { l:'4%',  t:'44%', s:'13px', d:'8.1s', dl:'1.0s',  a:'0.30' },
-        { l:'93%', t:'40%', s:'10px', d:'9.8s', dl:'2.7s',  a:'0.27' },
-        { l:'35%', t:'89%', s:'14px', d:'7.3s', dl:'0.4s',  a:'0.32' },
-        { l:'65%', t:'84%', s:'10px', d:'10.2s',dl:'4.4s',  a:'0.24' },
-        { l:'23%', t:'19%', s:'9px',  d:'11.1s',dl:'1.3s',  a:'0.28' },
+        { l:'7%',  t:'9%',  s:'18px', d:'6.8s', dl:'0s',    a:'0.38' },
+        { l:'87%', t:'7%',  s:'14px', d:'8.2s', dl:'1.9s',  a:'0.32' },
+        { l:'13%', t:'73%', s:'16px', d:'7.1s', dl:'0.8s',  a:'0.35' },
+        { l:'83%', t:'79%', s:'20px', d:'7.6s', dl:'2.3s',  a:'0.30' },
+        { l:'50%', t:'4%',  s:'12px', d:'9.4s', dl:'3.2s',  a:'0.28' },
+        { l:'4%',  t:'44%', s:'17px', d:'8.1s', dl:'1.0s',  a:'0.34' },
+        { l:'93%', t:'40%', s:'13px', d:'9.8s', dl:'2.7s',  a:'0.29' },
+        { l:'35%', t:'89%', s:'18px', d:'7.3s', dl:'0.4s',  a:'0.36' },
+        { l:'65%', t:'84%', s:'13px', d:'10.2s',dl:'4.4s',  a:'0.27' },
+        { l:'23%', t:'19%', s:'11px', d:'11.1s',dl:'1.3s',  a:'0.30' },
       ].forEach(h => {
         const el = document.createElement('div');
         el.className = 'bg-heart';
@@ -676,7 +650,7 @@
       const r   = envelope.getBoundingClientRect();
       const cx  = r.left + r.width  / 2;
       const cy  = r.top  + r.height / 2;
-      const pal = ['#FFB3C6','#E08090','#FFDCE8','#FF8FA8','#FFF0F4','#F5BFCC'];
+      const pal = ['#E8C060','#CC8898','#F2E8D8','#C87080','#F5E0A0','#D4A0A8'];
       for (let i = 0; i < 18; i++) {
         const sp    = document.createElement('div');
         sp.className = 'sparkle';
@@ -699,7 +673,6 @@
       }
     }
 
-    /* ── Event listeners ── */
     envelope.addEventListener('touchstart', function (e) {
       e.preventDefault();
       openEnvelope();
@@ -707,7 +680,6 @@
 
     envelope.addEventListener('click', openEnvelope);
 
-    /* ── Replay ── */
     replayBtn.addEventListener('click', function () {
       opened = false;
       envelope.classList.remove('still');
@@ -718,7 +690,6 @@
       letterOverlay.classList.remove('show');
       replayBtn.classList.remove('show');
     });
-
   </script>
 </body>
 </html>
